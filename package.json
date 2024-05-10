@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "wdio run src/config/wdio.conf.js",
-    "wdio": "wdio run ./src/config/wdio.conf.js"
+    "wdio": "wdio run ./src/config/wdio.conf.js",
+    "allure": "allure generate allure-results --clean && allure open allure-report"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@wdio/allure-reporter": "^8.36.1",
     "@wdio/cli": "^8.36.1",
     "@wdio/local-runner": "^8.36.1",
     "@wdio/mocha-framework": "^8.36.1",
