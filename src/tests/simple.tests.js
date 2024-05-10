@@ -9,7 +9,7 @@ describe('Google Cloud Navigation', () => {
     //Handle cookies
     await $('//*[@class="glue-cookie-notification-bar__accept"]').click();
     //Search icon click
-    await $('div.YSM5S').click();
+    await homePage.navigationMenu.item('search').click();
     //Search word insert
     await $('div.YSM5S input').setValue('Google Cloud Platform Pricing Calculator');
 
