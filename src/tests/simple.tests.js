@@ -1,8 +1,11 @@
 const { expect, browser, $ } = require('@wdio/globals');
+const HomePage = require('./../po/pages/home.page');
+
+const homePage = new HomePage();
 
 describe('Google Cloud Navigation', () => {
   it('should open the website and use searchbar', async () => {
-    await browser.url('https://cloud.google.com/');
+    await homePage.open();
     //Handle cookies
     await $('//*[@class="glue-cookie-notification-bar__accept"]').click();
     //Search icon click
@@ -12,4 +15,4 @@ describe('Google Cloud Navigation', () => {
 
     await browser.keys('Enter');
   });
-  });
+});
