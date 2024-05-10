@@ -11,7 +11,8 @@ describe('Google Cloud Navigation', () => {
     //Search icon click
     await homePage.navigationMenu.item('search').click();
     //Search word insert
-    await $('div.YSM5S input').setValue('Google Cloud Platform Pricing Calculator');
+    await homePage.navigationMenu.searchTab.setValue('Google Cloud Platform Pricing Calculator');
+    // await $('div.YSM5S input').setValue('Google Cloud Platform Pricing Calculator');
 
     await browser.keys('Enter');
   });

@@ -1,13 +1,17 @@
 class NavigationMenu {
-get name(){
+  get name() {
     // return $('.name')
-}
+  }
 
   item(itemName) {
     const icons = {
       search: 'div.YSM5S',
     };
-    return $(icons[itemName.toLowerCase()])
+    return $(icons[itemName.toLowerCase()]);
+  }
+
+  get searchTab() {
+    return $('div.YSM5S input');
   }
 }
 
