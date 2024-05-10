@@ -191,8 +191,9 @@ exports.config = {
      * @param {string} commandName hook command name
      * @param {Array} args arguments that command would receive
      */
-    // beforeCommand: function (commandName, args) {
-    // },
+    beforeCommand: function (commandName, args) {
+        browser.maximizeWindow();
+    },
     /**
      * Hook that gets executed before the suite starts
      * @param {object} suite suite details
