@@ -35,13 +35,16 @@ class CalculatorComponents {
     const names = {
       gb2x375: 'li[data-value="2"]',
     };
-    return ($$(names[localSSDName])[1]);
+    return $$(names[localSSDName])[1];
   }
   region(regionName) {
     const names = {
       netherlands: 'li[data-value="europe-west4"]',
     };
-    return $(names[regionName])
+    return $(names[regionName]);
+  }
+  get shareWindow() {
+    return $('//*[@class="bwApif-cnG4Wd"]');
   }
 }
 

@@ -80,6 +80,6 @@ describe('Google Cloud Navigation', () => {
     await calculator.calculatorComponents.buttons('share').click();
 
     //Wait for Shere window to appear
-    await $('//*[@class="bwApif-cnG4Wd"]').waitForDisplayed({ timeout: 2000 });
+    await calculator.calculatorComponents.shareWindow.waitForDisplayed({ timeout: 2000 });
   });
 });
