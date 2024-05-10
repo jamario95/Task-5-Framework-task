@@ -1,9 +1,13 @@
 const { expect, browser, $ } = require('@wdio/globals');
 const HomePage = require('./../po/pages/home.page.js');
 const SearchPage = require('../po/pages/search.page.js');
+const SelectProduct = require('./../po/pages/selectProduct.page.js')
+
+
 
 const homePage = new HomePage();
 const searchPage = new SearchPage();
+const selectProduct = new SelectProduct()
 
 describe('Google Cloud Navigation', () => {
   it('should open the website and use searchbar', async () => {
@@ -26,11 +30,11 @@ describe('Google Cloud Navigation', () => {
 
   it('Create pricing calculator', async () => {
     //Click Add button
-    await $('//span[text()="Add to estimate"]').click();
+    await selectProduct.products.openProductsList.click()
     //Wait for pop-up to open
-    await $('div.bwApif-wzTsW > div > div').waitForDisplayed({ timeout: 2000 });
+    await selectProduct.products.productsWindow.waitForDisplayed({ timeout: 2000 });
     //Select compute
-    await $('//*[@class="honxjf"] [text()="Compute Engine"]').click();
+    await selectProduct.products.chooseProduct.click();
     //Wait for full url
     await new Promise((resolve) => setTimeout(resolve, 2000));
   });
