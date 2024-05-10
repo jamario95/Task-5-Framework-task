@@ -50,7 +50,7 @@ describe('Google Cloud Navigation', () => {
     await calculator.calculatorComponents.textArea('numberMemory').setValue('30');
 
     //Select Add GPUs
-    await $("//button[@aria-label='Add GPUs']//span[@class='eBlXUe-hywKDc']").click();
+    await calculator.calculatorComponents.buttons('addGPU').click();
 
     //Select GPU Model "NVIDIA Tesla V100"
     await $('//span[text()="GPU Model"]/ancestor::div[contains(@class, "O1htCb-H9tDt PPUDSe t8xIwc")]').click();
@@ -65,7 +65,7 @@ describe('Google Cloud Navigation', () => {
     await $('li[data-value="europe-west4"]').click();
 
     //Commited use dicount options : 1 year
-    await $('//input[@id="1-year"]/ancestor::div[contains(@class, "e2WL2b MYT3K pV2hx oLWDHd")]').click();
+    await calculator.calculatorComponents.buttons('oneYear').click();
 
     // Check the price from calculator on bottom right ???
 
@@ -73,7 +73,7 @@ describe('Google Cloud Navigation', () => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     //Click Shere
-    await $('//span[@class="FOBRw-vQzf8d"]').click();
+    await calculator.calculatorComponents.buttons('share').click();
 
     //Wait for Shere window to appear
     await $('//*[@class="bwApif-cnG4Wd"]').waitForDisplayed({ timeout: 2000 });
