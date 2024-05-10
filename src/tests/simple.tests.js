@@ -53,16 +53,20 @@ describe('Google Cloud Navigation', () => {
     await calculator.calculatorComponents.buttons('addGPU').click();
 
     //Select GPU Model "NVIDIA Tesla V100"
-    await $('//span[text()="GPU Model"]/ancestor::div[contains(@class, "O1htCb-H9tDt PPUDSe t8xIwc")]').click();
-    await $('li[data-value="nvidia-tesla-v100"]').click();
+    await calculator.calculatorComponents.dropdown('gpuModel').click();
+    await calculator.calculatorComponents.gpuModels('nvidiaTeslaV100').click();
+    // await $('li[data-value="nvidia-tesla-v100"]').click();
 
     //Select Local SSD 2x325Gb
-    await $('//span[text()="Local SSD"]/ancestor::div[contains(@class, "O1htCb-H9tDt PPUDSe t8xIwc")]').click();
-    await $$('li[data-value="2"]')[1].click();
+    await calculator.calculatorComponents.dropdown('localSSD').click();
+    await calculator.calculatorComponents.localSSD('gb2x375').click();
+    // await $$('li[data-value="2"]')[1].click();
 
     //Select Region Netherlands since Frankfurt is missing
-    await $('//span[text()="Region"]/ancestor::div[contains(@class, "O1htCb-H9tDt PPUDSe t8xIwc")]').click();
-    await $('li[data-value="europe-west4"]').click();
+    await calculator.calculatorComponents.dropdown('region').click();
+    await calculator.calculatorComponents.region('netherlands').click();
+
+    // await $('li[data-value="europe-west4"]').click();
 
     //Commited use dicount options : 1 year
     await calculator.calculatorComponents.buttons('oneYear').click();
