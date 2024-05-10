@@ -4,6 +4,7 @@ const SearchPage = require('../po/pages/search.page.js');
 const SelectProduct = require('./../po/pages/selectProduct.page.js');
 const Calculator = require('../po/pages/calculator.page.js');
 const Summary = require('../po/pages/summary.page.js');
+const standardData = require('./../po/data/standard-compute-engine.js');
 
 const homePage = new HomePage();
 const searchPage = new SearchPage();
@@ -44,7 +45,7 @@ describe('Google Cloud Navigation', () => {
     //Insert the full url
     await browser.url(await browser.getUrl());
     //Set Number of instances
-    await calculator.calculatorComponents.textArea('numberInstances').setValue('4');
+    await calculator.calculatorComponents.textArea('numberInstances').setValue(standardData.numberOfInstances);
 
     //Edit Machine type to n1-standard-8 (vCPUs: 8, RAM: 30 GB)
     await calculator.calculatorComponents.textArea('numberCPUs').setValue('8');
@@ -56,18 +57,14 @@ describe('Google Cloud Navigation', () => {
     //Select GPU Model "NVIDIA Tesla V100"
     await calculator.calculatorComponents.dropdown('gpuModel').click();
     await calculator.calculatorComponents.gpuModels('nvidiaTeslaV100').click();
-    // await $('li[data-value="nvidia-tesla-v100"]').click();
 
     //Select Local SSD 2x325Gb
     await calculator.calculatorComponents.dropdown('localSSD').click();
     await calculator.calculatorComponents.localSSD('gb2x375').click();
-    // await $$('li[data-value="2"]')[1].click();
 
     //Select Region Netherlands since Frankfurt is missing
     await calculator.calculatorComponents.dropdown('region').click();
     await calculator.calculatorComponents.region('netherlands').click();
-
-    // await $('li[data-value="europe-west4"]').click();
 
     //Commited use dicount options : 1 year
     await calculator.calculatorComponents.buttons('oneYear').click();
@@ -94,38 +91,38 @@ describe('Google Cloud Navigation', () => {
 
     //Instances check
     const instances = await summary.summaryList.values('instances').getText();
-    expect(instances).toHaveText('4');
+    expect(instances).toHaveText(standardData.numberOfInstances);
 
     //Operating System check
     const operatingSystem = await summary.summaryList.values('operatingSystem').getText();
-    expect(operatingSystem).toHaveText('Free: Debian, CentOS, CoreOS, Ubuntu or BYOL (Bring Your Own License)');
+    expect(operatingSystem).toHaveText(standardData.operatingSystem);
 
     //Provisioning Model check
     const provisioningModel = await summary.summaryList.values('provisioningModel').getText();
-    expect(provisioningModel).toHaveText('Regular');
+    expect(provisioningModel).toHaveText(standardData.provisioningModel);
 
     //Machine type check
     const machineType = await summary.summaryList.values('machineType').getText();
-    expect(machineType).toHaveText('n1-standard-8');
+    expect(machineType).toHaveText(standardData.machineType);
 
     //Add GPUs selected check
     const numberGpu = await summary.summaryList.values('numberGpu').getText();
-    expect(numberGpu).toHaveText('1');
+    expect(numberGpu).toHaveText(standardData.numberGpu);
 
     // GPU type/model check
     const bootDiskType = await summary.summaryList.values('bootDiskType').getText();
-    expect(bootDiskType).toHaveText('NVIDIA Tesla V100');
+    expect(bootDiskType).toHaveText(standardData.bootDiskType);
 
     //Local SSD check
     const localSsd = await summary.summaryList.values('localSsd').getText();
-    expect(localSsd).toHaveText('2x375 GB');
+    expect(localSsd).toHaveText(standardData.localSsd);
 
     // //Datacenter location check
     const region = await summary.summaryList.values('region').getText();
-    expect(region).toHaveText('Netherlands (europe-west4)');
+    expect(region).toHaveText(standardData.region);
 
     //Commited usage check
     const commitedUsage = await summary.summaryList.values('commitedUsage').getText();
-    expect(commitedUsage).toHaveText('1 year');
+    expect(commitedUsage).toHaveText(standardData.commitedUsage);
   });
 });
