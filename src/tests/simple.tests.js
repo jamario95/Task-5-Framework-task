@@ -3,11 +3,13 @@ const HomePage = require('./../po/pages/home.page.js');
 const SearchPage = require('../po/pages/search.page.js');
 const SelectProduct = require('./../po/pages/selectProduct.page.js');
 const Calculator = require('../po/pages/calculator.page.js');
+const Summary = require('../po/pages/summary.page.js');
 
 const homePage = new HomePage();
 const searchPage = new SearchPage();
 const selectProduct = new SelectProduct();
 const calculator = new Calculator();
+const summary = new Summary();
 
 describe('Google Cloud Navigation', () => {
   it('should open the website and use searchbar', async () => {
@@ -18,7 +20,6 @@ describe('Google Cloud Navigation', () => {
     await homePage.navigationMenu.item('search').click();
     //Search word insert
     await homePage.navigationMenu.searchTab.setValue('Google Cloud Platform Pricing Calculator');
-    // await $('div.YSM5S input').setValue('Google Cloud Platform Pricing Calculator');
 
     await browser.keys('Enter');
   });
@@ -81,5 +82,50 @@ describe('Google Cloud Navigation', () => {
 
     //Wait for Shere window to appear
     await calculator.calculatorComponents.shareWindow.waitForDisplayed({ timeout: 2000 });
+  });
+
+  //Check if values from Point 6 are the same as on summary
+  it('Should compare results', async () => {
+    //Get href for Summary
+    const summaryHref = await $('//*[@class="tltOzc MExMre rP2xkc jl2ntd"]').getAttribute('href');
+
+    //Go to summary page
+    await browser.url('https://cloud.google.com' + summaryHref);
+
+    //Instances check
+    const instances = await summary.summaryList.values('instances').getText();
+    expect(instances).toHaveText('4');
+
+    //Operating System check
+    const operatingSystem = await summary.summaryList.values('operatingSystem').getText();
+    expect(operatingSystem).toHaveText('Free: Debian, CentOS, CoreOS, Ubuntu or BYOL (Bring Your Own License)');
+
+    //Provisioning Model check
+    const provisioningModel = await summary.summaryList.values('provisioningModel').getText();
+    expect(provisioningModel).toHaveText('Regular');
+
+    //Machine type check
+    const machineType = await summary.summaryList.values('machineType').getText();
+    expect(machineType).toHaveText('n1-standard-8');
+
+    //Add GPUs selected check
+    const numberGpu = await summary.summaryList.values('numberGpu').getText();
+    expect(numberGpu).toHaveText('1');
+
+    // GPU type/model check
+    const bootDiskType = await summary.summaryList.values('bootDiskType').getText();
+    expect(bootDiskType).toHaveText('NVIDIA Tesla V100');
+
+    //Local SSD check
+    const localSsd = await summary.summaryList.values('localSsd').getText();
+    expect(localSsd).toHaveText('2x375 GB');
+
+    // //Datacenter location check
+    const region = await summary.summaryList.values('region').getText();
+    expect(region).toHaveText('Netherlands (europe-west4)');
+
+    //Commited usage check
+    const commitedUsage = await summary.summaryList.values('commitedUsage').getText();
+    expect(commitedUsage).toHaveText('1 year');
   });
 });
