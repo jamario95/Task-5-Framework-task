@@ -40,8 +40,8 @@ class Calculator extends HomePage {
     this.calculatorComponents.dropdown('region').click();
     return this.calculatorComponents.region(region).click();
   }
-  async selectOneYear() {
-    return this.calculatorComponents.buttons('oneYear').click();
+  async selectButton(year) {
+    return this.calculatorComponents.buttons(year).click();
   }
 
   async selectShare(){
