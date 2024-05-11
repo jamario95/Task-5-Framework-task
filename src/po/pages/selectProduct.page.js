@@ -6,6 +6,9 @@ class SelectProduct extends HomePage {
     super();
     this.products = new Products();
   }
+  async open() {
+    await browser.url('https://cloud.google.com/products/calculator?hl=pl');
+  }
 }
 
 module.exports = SelectProduct;
