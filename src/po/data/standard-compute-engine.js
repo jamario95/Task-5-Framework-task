@@ -1,5 +1,7 @@
 const data = {
   numberOfInstances: '4',
+  numberOfCPUs: '8',
+  ammountOfMemory: '30',
   operatingSystem: 'Free: Debian, CentOS, CoreOS, Ubuntu or BYOL (Bring Your Own License)',
   provisioningModel: 'Regular',
   machineType: 'n1-standard-8, vCPUs: 8, RAM: 30 GB',

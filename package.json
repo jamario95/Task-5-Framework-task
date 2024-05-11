@@ -6,6 +6,8 @@
   "scripts": {
     "test": "wdio run src/config/wdio.conf.js",
     "wdio": "wdio run ./src/config/wdio.conf.js",
+    "wdio:smoke": "wdio run ./src/config/wdio.conf.js --mochaOpts.grep @smoke",
+
     "allure": "allure generate allure-results --clean && allure open allure-report"
   },
   "keywords": [],
