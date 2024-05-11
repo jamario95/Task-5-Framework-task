@@ -9,6 +9,16 @@ class SelectProduct extends HomePage {
   async open() {
     await browser.url('https://cloud.google.com/products/calculator?hl=pl');
   }
+
+  async addProduct() {
+    return this.products.openProductsList.click();
+  }
+  async waitWindowDisplay() {
+    return this.products.productsWindow.waitForDisplayed({ timeout: 2000 });
+  }
+  async selectProduct() {
+    return this.products.chooseProduct.click();
+  }
 }
 
 module.exports = SelectProduct;

@@ -14,9 +14,12 @@ class Calculator extends HomePage {
       //Handle cookies
     await $('//*[@class="glue-cookie-notification-bar__accept"]').click();
     }catch(error){
-      
+
     }
 
+  }
+  async addProduct() {
+    // return this.navigationMenu.item('search').click();
   }
 }
 

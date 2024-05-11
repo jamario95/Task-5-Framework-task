@@ -16,28 +16,26 @@ const summary = new Summary();
 describe('Google Cloud Navigation', () => {
   it('should open the website and use searchbar', async () => {
     await homePage.open();
-    //Handle cookies
-    await $('//*[@class="glue-cookie-notification-bar__accept"]').click();
     //Search icon click
-    await homePage.navigationMenu.item('search').click();
+    await homePage.clickSearchIcon();
     //Search word insert
-    await homePage.navigationMenu.searchTab.setValue('Google Cloud Platform Pricing Calculator');
+    await homePage.enterSearchText();
 
-    await browser.keys('Enter');
+    await homePage.clickEnter();
   });
 
   it('Should click the correct option from seach list', async () => {
     //Select 1st elemet from search
-    await searchPage.listSearch.SearchResult.click();
+    await searchPage.clickCalculatorOption();
   });
 
   it('Create pricing calculator', async () => {
     //Click Add button
-    await selectProduct.products.openProductsList.click();
+    await selectProduct.addProduct()
     //Wait for pop-up to open
-    await selectProduct.products.productsWindow.waitForDisplayed({ timeout: 2000 });
+    await selectProduct.waitWindowDisplay()
     //Select compute
-    await selectProduct.products.chooseProduct.click();
+    await selectProduct.selectProduct();
     //Wait for full url
     await new Promise((resolve) => setTimeout(resolve, 2000));
   });

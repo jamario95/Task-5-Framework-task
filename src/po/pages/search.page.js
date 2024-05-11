@@ -11,6 +11,9 @@ class SearchPage extends HomePage {
       'https://cloud.google.com/s/results?q=Google%20Cloud%20Platform%20Pricing%20Calculator&text=Google%20Cloud%20Platform%20Pricing%20Calculator'
     );
   }
+  async clickCalculatorOption() {
+    return this.listSearch.SearchResult.click();
+  }
 }
 
 module.exports = SearchPage;
