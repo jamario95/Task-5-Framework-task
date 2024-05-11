@@ -10,17 +10,47 @@ class Calculator extends HomePage {
     await browser.url(
       'https://cloud.google.com/products/calculator?hl=pl&dl=CiQxMjA3ZmUyZi0yM2RjLTQzZDEtYThjYy0wNmYyYjQzNGU0MzQQCBokMEY0MDFERUUtMDQxRi00ODFDLTg4N0YtQjk1NEFFNzZDMDVB'
     );
-    try{
+    try {
       //Handle cookies
-    await $('//*[@class="glue-cookie-notification-bar__accept"]').click();
-    }catch(error){
-
-    }
-
+      await $('//*[@class="glue-cookie-notification-bar__accept"]').click();
+    } catch (error) {}
   }
-  async addProduct() {
-    // return this.navigationMenu.item('search').click();
+  async inputInstanceNumber(numberOfInstances) {
+    return this.calculatorComponents.textArea('numberInstances').setValue(numberOfInstances);
   }
+  async inputCPUNumber(numberOfCPUs) {
+    return this.calculatorComponents.textArea('numberCPUs').setValue(numberOfCPUs);
+  }
+  async inputMemoryNumber(ammountOfMemory) {
+    return this.calculatorComponents.textArea('numberMemory').setValue(ammountOfMemory);
+  }
+  async selectAddGPU() {
+    return this.calculatorComponents.buttons('addGPU').click();
+  }
+  async selectGPUModel(gpuModel) {
+    this.calculatorComponents.dropdown('gpuModel').click();
+    this.calculatorComponents.gpuModels(gpuModel).click();
+  }
+
+  async selectLocalSSD(localSSD) {
+    this.calculatorComponents.dropdown('localSSD').click();
+    this.calculatorComponents.localSSD(localSSD).click();
+  }
+  async selectRegion(region) {
+    this.calculatorComponents.dropdown('region').click();
+    return this.calculatorComponents.region(region).click();
+  }
+  async selectOneYear() {
+    return this.calculatorComponents.buttons('oneYear').click();
+  }
+
+  async selectShare(){
+  return this.calculatorComponents.buttons('share').click()
+  }
+  async waitWindowDisplay() {
+    return this.calculatorComponents.shareWindow.waitForDisplayed({ timeout: 2000 });
+  }
+
 }
 
 module.exports = Calculator;

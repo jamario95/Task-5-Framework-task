@@ -31,9 +31,9 @@ describe('Google Cloud Navigation', () => {
 
   it('Create pricing calculator', async () => {
     //Click Add button
-    await selectProduct.addProduct()
+    await selectProduct.addProduct();
     //Wait for pop-up to open
-    await selectProduct.waitWindowDisplay()
+    await selectProduct.waitWindowDisplay();
     //Select compute
     await selectProduct.selectProduct();
     //Wait for full url
@@ -44,40 +44,35 @@ describe('Google Cloud Navigation', () => {
     //Insert the full url
     await browser.url(await browser.getUrl());
     //Set Number of instances
-    await calculator.calculatorComponents.textArea('numberInstances').setValue(standardData.numberOfInstances);
+    await calculator.inputInstanceNumber(standardData.numberOfInstances);
 
     //Edit Machine type to n1-standard-8 (vCPUs: 8, RAM: 30 GB)
     await calculator.calculatorComponents.textArea('numberCPUs').setValue(standardData.numberOfCPUs);
     await calculator.calculatorComponents.textArea('numberMemory').setValue(standardData.ammountOfMemory);
 
     //Select Add GPUs
-    await calculator.calculatorComponents.buttons('addGPU').click();
+    await calculator.selectAddGPU();
 
     //Select GPU Model "NVIDIA Tesla V100"
-    await calculator.calculatorComponents.dropdown('gpuModel').click();
-    await calculator.calculatorComponents.gpuModels('nvidiaTeslaV100').click();
+    await calculator.selectGPUModel('nvidiaTeslaV100');
 
     //Select Local SSD 2x325Gb
-    await calculator.calculatorComponents.dropdown('localSSD').click();
-    await calculator.calculatorComponents.localSSD('gb2x375').click();
+    await calculator.selectLocalSSD('gb2x375');
 
     //Select Region Netherlands since Frankfurt is missing
-    await calculator.calculatorComponents.dropdown('region').click();
-    await calculator.calculatorComponents.region('netherlands').click();
+    await calculator.selectRegion('netherlands');
 
     //Commited use dicount options : 1 year
-    await calculator.calculatorComponents.buttons('oneYear').click();
-
-    // Check the price from calculator on bottom right ???
+    await calculator.selectOneYear();
 
     //Delay for system to calculate correct $
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
     //Click Shere
-    await calculator.calculatorComponents.buttons('share').click();
+    await calculator.selectShare();
 
     //Wait for Shere window to appear
-    await calculator.calculatorComponents.shareWindow.waitForDisplayed({ timeout: 2000 });
+    await calculator.waitWindowDisplay();
   });
 
   //Check if values from Point 6 are the same as on summary
@@ -89,39 +84,39 @@ describe('Google Cloud Navigation', () => {
     await browser.url('https://cloud.google.com' + summaryHref);
 
     //Instances check
-    const instances = await summary.summaryList.values('instances').getText();
+    const instances = await summary.getNumberofInstances();
     expect(instances).toHaveText(standardData.numberOfInstances);
 
     //Operating System check
-    const operatingSystem = await summary.summaryList.values('operatingSystem').getText();
+    const operatingSystem = await summary.getOperatingSystem();
     expect(operatingSystem).toHaveText(standardData.operatingSystem);
 
     //Provisioning Model check
-    const provisioningModel = await summary.summaryList.values('provisioningModel').getText();
+    const provisioningModel = await summary.getProvisioningModel();
     expect(provisioningModel).toHaveText(standardData.provisioningModel);
 
     //Machine type check
-    const machineType = await summary.summaryList.values('machineType').getText();
+    const machineType = await summary.getMachineType();
     expect(machineType).toHaveText(standardData.machineType);
 
     //Add GPUs selected check
-    const numberGpu = await summary.summaryList.values('numberGpu').getText();
+    const numberGpu = await summary.getNumberOfGpu();
     expect(numberGpu).toHaveText(standardData.numberGpu);
 
     // GPU type/model check
-    const bootDiskType = await summary.summaryList.values('bootDiskType').getText();
+    const bootDiskType = await summary.getBootDiskType();
     expect(bootDiskType).toHaveText(standardData.bootDiskType);
 
     //Local SSD check
-    const localSsd = await summary.summaryList.values('localSsd').getText();
+    const localSsd = await summary.getLocalSsd();
     expect(localSsd).toHaveText(standardData.localSsd);
 
     // //Datacenter location check
-    const region = await summary.summaryList.values('region').getText();
+    const region = await summary.getRegion();
     expect(region).toHaveText(standardData.region);
 
     //Commited usage check
-    const commitedUsage = await summary.summaryList.values('commitedUsage').getText();
+    const commitedUsage = await summary.getCommitedUsage()
     expect(commitedUsage).toHaveText(standardData.commitedUsage);
   });
 
