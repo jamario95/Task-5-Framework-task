@@ -47,8 +47,8 @@ describe('Google Cloud Navigation', () => {
     await calculator.inputInstanceNumber(standardData.numberOfInstances);
 
     //Edit Machine type to n1-standard-8 (vCPUs: 8, RAM: 30 GB)
-    await calculator.calculatorComponents.textArea('numberCPUs').setValue(standardData.numberOfCPUs);
-    await calculator.calculatorComponents.textArea('numberMemory').setValue(standardData.ammountOfMemory);
+    await calculator.inputCPUNumber(standardData.numberOfCPUs);
+    await calculator.inputMemoryNumber(standardData.ammountOfMemory);
 
     //Select Add GPUs
     await calculator.selectAddGPU();
